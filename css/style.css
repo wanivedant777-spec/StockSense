@@ -1,0 +1,672 @@
+:root {   /* The master storage for your theme variables */
+  --bg-base:        #0d1117;  /* Saves a deep black color for the main background.*/
+  --bg-surface:     #161b22;  /* Saves a slightly lighter black for cards/panes. */
+  --bg-elevated:    #1c2128;  /* Saves an even lighter black for hover effects. */
+  --bg-border:      #30363d;  /* Saves a dark grey for lines and borders. */
+  --text-primary:   #e6edf3;  /* Saves a bright white for your main reading text. */
+  --text-secondary: #8b949e;  /* Saves a muted grey for less important text.*/
+  --text-muted:     #484f58;  /* Saves a dark grey for inactive or disabled text.*/
+  --accent:         #00d4aa;  /* Saves a cyan color for important buttons/links.*/
+  --accent-dim:     #00d4aa22;/* Saves a see-through cyan for active backgrounds.*/
+  --green:          #3fb950;  /* Saves a bullish green color for positive numbers.*/
+  --green-bg:       #3fb95015;/* Saves a see-through green for positive backgrounds.*/
+  --red:            #f85149;  /* Saves a bearish red color for negative numbers.*/
+  --red-bg:         #f8514915;/* Saves a see-through red for negative backgrounds.*/
+  --yellow:         #d29922;  /* Saves a yellow color for warnings or neutral data.*/
+  --font:           'Inter', sans-serif; /* Sets your default text style.*/
+  --radius-sm:      6px;    /* Saves a size for slightly rounded corners.*/
+  --radius-md:      10px;   /* Saves a size for medium rounded corners.*/
+  --radius-lg:      14px;   /* Saves a size for very rounded corners. */
+  --sidebar-width:  220px;  /* Locks the exact width of your left menu. */
+  --navbar-height:  60px;   /* Locks the exact height of your top menu.*/
+}
+*, *::before, *::after {      /* Targets each and every element on webpage. */
+  box-sizing: border-box;     /* Stops padding from making your boxes wider.*/
+  margin: 0;                  /* Deletes all default outside spacing.*/
+  padding: 0;                 /* Deletes all default inside spacing. */
+}
+
+html, body {            /* Targets the main structural containers of the page. */
+  height: 100%;         /* Forces the background to cover the whole screen.*/
+}
+
+body {                                /*Targets the main visible area of your webpage.*/
+  font-family: var(--font);           /*Applies your chosen 'Inter' font to everything.*/
+  background-color: var(--bg-base);   /*Applies your dark base color to the background.*/
+  color: var(--text-primary);         /*Sets the default text color to bright white.*/
+  font-size: 14px;                    /*Sets the standard base text size.*/
+  line-height: 1.6;                   /*Adds comfortable breathing room between lines of text.*/
+  min-height: 100vh;                  /*Ensures the page background always stretches to the bottom of the screen.*/
+}
+
+a { /*Targets all clickable web links.*/
+  text-decoration: none;    /*Deletes the default underline from links.*/
+  color: inherit;           /*Makes links use the exact same color as the text around them.*/
+}
+
+ul { /*Targets unordered (bulleted) lists.*/
+  list-style: none;         /*Removes the default ugly bullet dots.*/
+}
+
+button { /*Targets all clickable buttons on the page.*/
+  cursor: pointer;           /* Changes the mouse arrow into a clicking hand icon when hovering. */
+  font-family: var(--font);  /* Forces buttons to use your 'Inter' font instead of the ugly browser default.*/
+}
+
+/* =====================
+   NAVBAR
+===================== */
+.navbar { /*Targets the main container for your top navigation menu.*/
+  position: fixed;  /*Glues the menu to the screen so it stays visible when you scroll down.*/
+  top: 0;     /*Stretches the menu across the absolute top of the screen.*/
+  left: 0;    /*Stretches the menu across the absolute left edge of the screen.*/
+  right: 0;   /*Stretches the menu across the absolute Right edge of the screen.*/
+  height: var(--navbar-height);  /*Sets the menu height using the 60px variable you saved earlier.*/
+  background: var(--bg-surface); /*Colors the menu background with your saved lighter-black variable.*/
+  border-bottom: 1px solid var(--bg-border); /*Draws a thin, dark grey line along the bottom edge of the menu.*/
+  display: flex; /*Activates a flexible layout system to easily position the items inside.*/
+  align-items: center; /*Vertically centers everything inside the menu so it isn't glued to the top edge.*/
+  justify-content: space-between; /*Pushes your logo to the far left and your other links to the far right.*/
+  padding: 0 24px; /*Adds empty breathing room on the left and right sides of the menu.*/
+  z-index: 100;  /*Forces the menu to always sit on top of any other overlapping content*/
+}
+
+.nav-logo { /*Targets the container holding your StockSENSE text and icon.*/
+  display: flex;            /*Activates flexible layout specifically for the logo pieces.*/
+  align-items: center;      /*Vertically centers the logo icon and text with each other.*/
+  gap: 8px;                 /*Adds exactly 8 pixels of space between the logo icon and the logo text.*/
+  font-size: 20px;          /*Sets the logo text size.*/
+  font-weight: 700;         /*Makes the logo text thick and bold.*/
+  letter-spacing: -0.5px;   /*Slightly squishes the letters together for a tighter, modern look.*/
+}
+
+.logo-icon {  /*Targets just the icon graphic inside your logo.*/
+  font-size: 22px; /*Makes the icon slightly larger than the text next to it.*/
+}
+
+.logo-accent { /*Targets a specific piece of text in your logo (likely the "SENSE" part).*/
+  color: var(--accent); /*Colors that specific text with your saved cyan variable to make it pop.*/
+}
+
+.nav-links {      /*Targets the invisible container holding all your menu links.*/
+  display: flex;  /*Lines up all the links in a neat horizontal row.*/
+  gap: 4px;       /*Adds a tiny 4-pixel space between each link.*/
+}
+
+.nav-link {     /* Targets the individual links (like "Dashboard" or "Watchlist").*/
+  padding: 6px 14px;                /*Adds clickable breathing room inside each link.*/
+  border-radius: var(--radius-sm);  /*Slightly rounds the corners of the links using your saved variable.*/
+  color: var(--text-secondary);     /*Colors the link text with your muted grey variable.*/
+  font-size: 14px;                  /*Sets the text size for the links.*/
+  font-weight: 500;                 /*Makes the text slightly thicker than normal, but not full bold.*/
+  transition: all 0.2s;             /*Makes any visual changes (like hovering) happen smoothly over 0.2 seconds.*/
+}
+
+.nav-link:hover { /*Targets a link only when your mouse pointer is resting on it.*/
+  color: var(--text-primary);    /*Changes the text to bright white when hovered.*/
+  background: var(--bg-elevated);/*Adds a lighter dark background behind the text when hovered.*/
+}
+
+.nav-link.active {  /*Targets the specific link of the page you are currently viewing.*/
+  color: var(--accent);          /*Changes the active text to your bright cyan variable.*/
+  background: var(--accent-dim); /*Highlights the active link with a see-through cyan background.*/
+}
+
+.market-status {  /*Targets the "Market Open" pill badge in the top right corner*/
+  display: flex;                  /*Activates flexible layout for the dot and text inside the badge.*/
+  align-items: center;            /*Vertically centers the pulsing dot with the "Market Open" text.*/
+  gap: 7px;                       /*Puts exactly 7 pixels of space between the dot and the text.*/
+  font-size: 13px;                /*Sets the text size to be slightly smaller than standard.*/
+  font-weight: 500;               /*Makes the text slightly thicker.*/
+  color: var(--green);            /*Colors the text with your bullish green variable.*/
+  background: var(--green-bg);    /*Fills the badge with your see-through green background.*/
+  padding: 5px 12px;              /*Adds inside breathing room so the background wraps nicely around the text.*/
+  border-radius: 20px;            /*Rounds the left and right edges completely to make a pill shape.*/
+  border: 1px solid var(--green); /*Draws a thin, solid green line entirely around the badge.*/
+}
+
+.status-dot { /*Targets the small indicator dot next to the "Market Open" text.*/
+  width: 8px;                   /*Sets the dot's width to 8 pixels.*/
+  height: 8px;                  /*Sets the dot's height to 8 pixels (making it a square initially).*/
+  background: var(--green);     /*Fills the dot with your saved bullish green color.*/
+  border-radius: 50%;           /*Rounds the corners completely, turning the square into a perfect circle.*/
+  animation: pulse 2s infinite; /*Applies an animation named "pulse" that takes 2 seconds and repeats forever.*/
+}
+
+@keyframes pulse { /*Creates the specific instructions for the "pulse" animation.*/
+  0%, 100% { opacity: 1; }      /*Makes the dot fully visible at the very start (0%) and end (100%) of the loop.*/
+  50%       { opacity: 0.3; }   /*Makes the dot mostly fade out halfway through (50%), creating the blinking "heartbeat" effect.*/
+}
+
+/* =====================
+   PAGE WRAPPER
+===================== */
+.page-wrapper { /*Targets the giant invisible box that holds everything below your top menu.*/
+  display: flex; /*Turns on a flexible layout so your left sidebar and right dashboard can sit side-by-side.*/
+  padding-top: var(--navbar-height);/*Pushes everything down by exactly 60px so your fixed top menu doesn't cover your charts.*/
+  min-height: 100vh; /*Guarantees this wrapper will stretch all the way down to the bottom of the screen.*/
+}
+
+
+/* =====================
+   SIDEBAR
+===================== */
+.sidebar {/*Targets the main container for your left-side navigation menu.*/
+  width: var(--sidebar-width);              /*Sets the width to the 220px variable you saved in your master list.*/
+  background: var(--bg-surface);            /*Fills the sidebar background with your saved lighter-black color.*/
+  border-right: 1px solid var(--bg-border); /*Draws a thin dark line to separate the right edge of the sidebar from the chart area.*/
+  position: fixed;                          /*Glues the sidebar to the screen so it stays visible even if the main page scrolls.*/
+  top: var(--navbar-height);                /*Starts the sidebar exactly below the top menu (pushing it 60px down).*/
+  left: 0;                                  /*Glues the sidebar to the extreme left edge of the screen.*/
+  bottom: 0;                                /*Stretches the sidebar all the way down to the absolute bottom edge.*/
+  display: flex;                            /*Activates flexible layout for organizing the links inside.*/
+  flex-direction: column;                   /*Stacks the menu items vertically (top to bottom) instead of side-by-side.*/
+  justify-content: space-between;           /*Pushes your main links to the top and any bottom links (like settings) to the bottom.*/
+  padding: 20px 0;                          /*Adds 20 pixels of empty breathing room at the top and bottom inside the sidebar.*/
+  overflow-y: auto;                         /*Allows the user to scroll inside the sidebar if you add too many links to fit on screen.*/
+}
+
+.menu-section-title { /*Targets the small category headings (like "MAIN MENU" or "TOOLS") in the sidebar.*/
+  font-size: 11px;            /*Makes this heading text very small.*/
+  font-weight: 600;           /*Makes the text bold and thick.*/
+  text-transform: uppercase;  /*Automatically forces all the letters to be CAPITALIZED.*/
+  letter-spacing: 0.8px;      /*Spreads the letters out slightly for a clean, technical dashboard look.*/
+  color: var(--text-muted);   /*Colors the text with your dark grey variable so it doesn't distract from the actual clickable links.*/
+  padding: 12px 20px 6px;     /*Adds specific breathing room: 12px top, 20px sides, and 6px bottom.*/
+}
+
+.menu-item { /*Targets the individual clickable links inside your left sidebar.*/
+  display: flex;                        /*Activates flexible layout to neatly align the icon and text next to each other.*/
+  align-items: center;                  /*Vertically centers the icon and the text so they line up perfectly.*/
+  gap: 10px;                            /*Adds exactly 10 pixels of space between the icon and the link text.*/
+  padding: 10px 20px;                   /*Adds clickable breathing room (10px top/bottom, 20px sides).*/
+  color: var(--text-secondary);         /*Colors the link text with your muted grey variable.*/
+  font-size: 14px;                      /*Sets the standard reading size for the menu text.*/
+  font-weight: 500;                     /*Makes the text slightly thicker than normal.*/
+  transition: all 0.2s;                 /*Makes hover effects (like color changes) smooth over 0.2 seconds.*/
+  border-left: 3px solid transparent;   /*Creates an invisible 3-pixel line on the left edge (to be used later).*/
+}
+
+.menu-item:hover {
+  color: var(--text-primary);      /*Brightens the text to white when hovered.*/
+  background: var(--bg-elevated);  /*Highlights the background with a lighter dark color when hovered.*/
+}
+
+.menu-item.active {
+  color: var(--accent);             /*Colors the active text with your bright cyan variable.*/
+  background: var(--accent-dim);    /*Highlights the active link with a see-through cyan background.*/
+  border-left-color: var(--accent); /*Turns that invisible left line into a solid cyan indicator line.*/
+}
+
+.menu-icon {        /*Targets just the small graphic icon next to the menu text.*/
+  font-size: 16px;  /*Makes the icon slightly larger than the 14px text next to it.*/
+}
+
+.sidebar-footer {
+  padding: 16px 20px;                    /*Adds specific breathing room inside the footer area.*/
+  border-top: 1px solid var(--bg-border);/*Draws a thin dark line to separate the footer from the links above it.*/
+  text-align: center;                    /*Centers any text or content exactly in the middle of the footer.*/
+}
+
+.clock-label {              /*Targets the small text label (like "IST TIME") above your clock.*/
+  font-size: 11px;          /*Makes this label text very small.*/
+  color: var(--text-muted); /*Colors the label dark grey so it doesn't distract from the actual time.*/
+  text-transform: uppercase;/*Forces all letters in the label to be automatically CAPITALIZED.*/
+  letter-spacing: 0.5px;    /*Spreads the letters out slightly for a cleaner look.*/
+}
+
+.clock-time {       /*Targets the actual moving numbers of your clock.*/
+  font-size: 22px;                    /*Makes the time numbers large and easy to read.*/
+  font-weight: 600;                   /*Makes the numbers thick and bold.*/
+  color: var(--accent);               /*Makes the numbers thick and bold.*/
+  font-variant-numeric: tabular-nums; /*Forces every number to take up the exact same width, stopping the clock from jumping left and right when a wide number (like 8) changes to a thin number (like 1).*/
+  margin: 4px 0;                      /*Adds 4 pixels of empty space above and below the numbers.*/
+  letter-spacing: 1px;                /*Spreads the time numbers out slightly.*/
+}
+
+/* =====================
+   MAIN CONTENT
+===================== */
+.main-content {                       /*Targets the giant container holding all your charts, cards, and news.*/
+  margin-left: var(--sidebar-width);  /*Pushes this container exactly 220px to the right so your fixed sidebar doesn't cover it.*/
+  flex: 1;                            /*Tells this container to stretch and fill all the remaining empty space on the screen.*/
+  padding: 28px;                      /*Adds a comfortable 28 pixels of empty breathing room inside the edges of the content area.*/
+  overflow-x: hidden;                 /*Hides anything that accidentally stretches too far left or right, preventing ugly horizontal scrollbars.*/
+}
+
+.page-header {                        /*Targets the top section of the page (usually holding the title and the date/clock).*/
+  display: flex;                      /*Activates flexible layout to organize the title on the left and the clock on the right.*/
+  justify-content: space-between;     /*Pushes the title text to the far left and the clock to the far right.*/
+  align-items: flex-start;            /*Aligns the title and the clock to the very top edge of their container.*/  
+  margin-bottom: 24px;                /*Adds 24 pixels of empty space below the header to separate it from your stock charts.*/
+}
+
+.page-title {                         /*Targets the main headline text (like "Market Overview").*/
+  font-size: 24px;                    /*Makes the headline large and prominent.*/
+  font-weight: 700;                   /*Makes the headline text thick and bold.*/
+  color: var(--text-primary);         /*Colors the text with your bright white variable.*/
+  letter-spacing: -0.5px;             /*Squishes the letters together slightly for a modern, sleek look.*/
+}
+
+.page-subtitle {                      /*Targets the smaller description text right below the main headline.*/
+  font-size: 14px;                    /*Sets this description text to your standard reading size.*/
+  color: var(--text-secondary);       /*Colors it with your muted grey variable so it doesn't compete with the main title.*/
+  margin-top: 2px;                    /*Pushes it down just slightly (2 pixels) from the bottom of the main title.*/
+}
+
+.header-date { /*Targets the small box displaying the current date in the top right corner.*/
+  font-size: 13px;                    /*Sets the date text to a slightly smaller, secondary reading size.*/
+  color: var(--text-secondary);       /*Colors the text with your muted grey variable.*/
+  background: var(--bg-surface);      /*Fills the badge with your lighter-black background color.*/
+  padding: 6px 14px;                  /*Adds comfortable clicking/breathing room inside the badge.*/
+  border-radius: var(--radius-sm);    /*Slightly rounds the corners using your saved small radius variable.*/
+  border: 1px solid var(--bg-border); /*Draws a thin dark line completely around the edge of the badge.*/
+}
+
+/* =====================
+   INDEX CARDS
+===================== */
+.index-cards {      /*Targets the invisible master container holding your top four market cards.*/
+  display: grid;    /*Activates a powerful grid layout system to organize the cards perfectly.*/
+  grid-template-columns: repeat(4, 1fr); /*Forces the container to chop itself into exactly 4 equal-sized columns side-by-side.*/
+  gap: 16px;        /*Adds exactly 16 pixels of empty space between each card so they don't touch.*/
+  margin-bottom: 24px; /*Pushes the main price chart down by 24 pixels so it doesn't overlap the cards.*/
+}
+
+.index-card {       /*Targets the individual market overview cards (the boxes themselves).*/
+  background: var(--bg-surface);      /*Fills the card with your lighter-black color so it stands out from the main background.*/
+  border: 1px solid var(--bg-border); /*Draws a thin dark outline around the card.*/
+  border-radius: var(--radius-lg);    /*Gives the card very rounded, soft corners using your saved variable.*/
+  padding: 18px 20px;                 /*Adds generous inside breathing room so the market numbers don't hit the borders.*/
+  transition: border-color 0.2s;      /*Makes the border glow effect smooth (taking 0.2 seconds) when you hover over it.*/
+}
+
+.index-card:hover {
+  border-color: var(--accent); /*Changes the dark border to your bright cyan variable, highlighting the card.*/
+}
+
+.card-label {    /*Targets the small title text inside your market cards (like "NIFTY 50").*/
+  font-size: 12px;               /*Makes the label text small.*/
+  font-weight: 600;              /*Makes the label text bold.*/
+  text-transform: uppercase;     /*Forces the label to always be displayed in CAPITAL LETTERS.*/
+  letter-spacing: 0.7px;         /*Spreads the letters out slightly for that clean dashboard look.*/
+  color: var(--text-secondary);  /*Colors the label with your muted grey variable.*/
+  margin-bottom: 8px;            /*Adds 8 pixels of space below the label, pushing the big price number down.*/
+}
+
+.card-value {  /*Targets the large main price number in the card.*/
+  font-size: 22px;                    /*Makes the price large and easy to read at a glance.*/
+  font-weight: 700;                   /*Makes the price extra thick and bold.*/
+  color: var(--text-primary);         /*Colors the price with your bright white variable.*/
+  letter-spacing: -0.5px;             /*Squishes the numbers together slightly.*/
+  margin-bottom: 6px;                 /*Adds 6 pixels of space below the price, pushing the percentage change text down.*/
+  font-variant-numeric: tabular-nums; /*Stops the numbers from shifting left and right when the live price ticks up and down.*/
+}
+
+.card-change {     /*Targets the small + or - percentage text at the bottom of the card.*/
+  font-size: 13px;      /*Makes the percentage text small.*/
+  font-weight: 500;     /*Makes the text slightly thicker than normal.*/
+}
+
+/* These 3 classes are reused everywhere on the page */
+.positive { color: var(--green); }            /*A reusable shortcut tool to instantly paint any text bullish green.*/
+.negative { color: var(--red);   }            /*A reusable shortcut tool to instantly paint any text bearish red.*/
+.neutral  { color: var(--text-secondary); }   /*A reusable shortcut tool to instantly paint any text muted grey.*/
+
+/* =====================
+   TWO COLUMN LAYOUT
+===================== */
+.two-col-layout {           /*Targets the invisible box that holds your main chart and right-side news feed.*/
+  display: grid;            /*Activates the powerful grid layout system.*/
+  grid-template-columns: 1fr 360px; /*Chops the screen into two columns: the left column stretches to fill all leftover space (1fr), and the right column is locked at exactly 360px wide.*/
+  gap: 20px;                /*Puts exactly 20 pixels of empty space between the left column and the right column so they don't touch.*/
+}
+
+
+/* =====================
+   CONTENT BOXES
+===================== */
+.content-box {    /*Targets the large container panels holding your main features.*/
+  background: var(--bg-surface);      /*Fills the panel with your lighter-black background color.*/
+  border: 1px solid var(--bg-border); /*Draws a thin dark outline around the panel.*/
+  border-radius: var(--radius-lg);    /*Gives the panel soft, very rounded corners.*/
+  padding: 20px;                      /*Adds 20 pixels of empty breathing room inside the panel.*/
+}
+
+.box-header {   /*Targets the top title area inside a content box.*/
+  display: flex;                  /*Activates flexible layout to arrange the title and any right-side items.*/
+  justify-content: space-between; /*Pushes the title to the far left and the badge/buttons to the far right.*/
+  align-items: center;            /*Vertically centers the title and badge so they line up perfectly.*/
+  margin-bottom: 16px;            /*Adds space below the header to separate it from the chart or news below it.*/
+}
+
+.box-title {    /*Targets the text of the box's title (e.g., "Price Chart" or "Latest News").*/
+  font-size: 16px;            /*Sets a medium-large text size for the title.*/
+  font-weight: 600;           /*Makes the title text thick and bold.*/
+  color: var(--text-primary); /*Colors the text with your bright white variable.*/
+}
+
+.box-badge {  /*Targets the small indicator pills (like the "+ LIVE" tag on your news feed).*/
+  font-size: 11px;                     /*Makes the text inside the badge very small.*/
+  font-weight: 600;                    /*Makes the badge text thick and bold.*/
+  padding: 3px 10px;                   /*Adds breathing room inside the badge.*/
+  border-radius: 20px;                 /*Completely rounds the left and right sides to make a pill shape.*/
+  background: var(--bg-elevated);      /*Fills the badge with a slightly lighter dark color to make it stand out.*/
+  color: var(--text-secondary);        /*Colors the text with your muted grey variable.*/
+  border: 1px solid var(--bg-border);  /*Draws a thin dark line completely around the badge.*/
+  text-transform: uppercase;           /*Forces all letters to be automatically CAPITALIZED.*/
+  letter-spacing: 0.5px;               /*Spreads the letters slightly for a clean, dashboard look.*/
+}
+
+.box-badge.live { /*Targets a specific badge only if it has the "live" class attached to it.*/
+  color: var(--green);          /*Overrides the default grey text with your bullish green variable.*/
+  background: var(--green-bg);  /*Overrides the background with your see-through green variable.*/
+  border-color: var(--green);   /*Overrides the border with a solid green line to make the "LIVE" tag pop.*/
+}
+
+/* Chart placeholder box */
+.chart-placeholder { /*Targets the big empty box where your interactive chart will go later.*/
+  height: 260px;                        /*Locks the height of this empty box to 260 pixels.*/
+  border-radius: var(--radius-md);      /*Slightly rounds the corners of the placeholder box.*/
+  border: 2px dashed var(--bg-border);  /*Draws a 2-pixel thick, dashed dark line around the box (standard for "empty state" designs).*/
+  display: flex;                        /*Activates flexible layout so you can easily center the text inside the empty box.*/
+  align-items: center;                  /*Pushes the placeholder text exactly to the vertical middle of the box.*/
+  justify-content: center;              /*Pushes the placeholder text exactly to the horizontal center of the box.*/
+  background: var(--bg-elevated);       /*Fills the box with a lighter dark color so it doesn't blend perfectly into the background*/
+}
+
+.chart-placeholder-inner { /*Targets the invisible container holding the text and icon inside the empty box.*/
+  text-align: center;         /*Forces any multiple lines of text inside to align to the center.*/
+  color: var(--text-muted);   /*Colors the placeholder text dark grey so it looks inactive.*/
+}
+
+.placeholder-icon { /*Targets the big icon graphic inside the placeholder box.*/
+  font-size: 40px;      /*Makes the icon massive (40 pixels).*/
+  display: block;       /*Forces the icon to sit on its own line, pushing the text below it.*/
+  margin-bottom: 10px;  /*Adds 10 pixels of empty space below the icon.*/
+  opacity: 0.4;         /*Makes the icon 60% transparent so it looks faded out.*/
+}
+
+.placeholder-sub { /*Targets the tiny subtitle text inside the placeholder (like "Powered by Chart.js").*/
+  font-size: 12px;           /*Makes this subtitle text very small.*/
+  margin-top: 4px;           /*Pushes the text down 4 pixels from whatever is right above it.*/
+  color: var(--text-muted);  /*Colors the subtitle dark grey.*/
+}
+
+/* Chart time range buttons */
+.chart-controls { /*Targets the invisible box that holds all the time buttons in a row.*/
+  display: flex;  /*Activates flexible layout so the buttons line up neatly side-by-side.*/
+  gap: 4px;       /*Adds a tiny 4-pixel space between each button so they don't touch.*/
+}
+
+.ctrl-btn { /*Targets the individual time range buttons themselves.*/
+  padding: 4px 10px;                  /*Adds clicking room inside the button (4px top/bottom, 10px sides).*/
+  font-size: 12px;                    /*Makes the button text small and neat.*/
+  font-weight: 500;                   /*Makes the text slightly thicker than normal.*/
+  border-radius: var(--radius-sm);    /*Slightly rounds the corners of the button.*/
+  border: 1px solid var(--bg-border); /*Draws a thin dark outline around the button.*/
+  background: transparent;            /*Makes the background invisible so the main page color shows through.*/
+  color: var(--text-secondary);       /*Colors the text with your muted grey variable.*/
+  transition: all 0.2s;               /*Makes hover and click color changes smooth over 0.2 seconds.*/
+}
+
+.ctrl-btn:hover {    /*Targets a button only when your mouse pointer hovers over it.*/
+  background: var(--bg-elevated); /*Highlights the button with a slightly lighter dark background.*/
+  color: var(--text-primary);     /*Brightens the text to white when hovered.*/
+}
+
+.ctrl-btn.active { /*Targets the specific button for the time range you are currently viewing.*/
+  background: var(--accent);   /*Fills the active button completely with your bright cyan variable.*/
+  border-color: var(--accent); /*Changes the border to match the cyan background*/
+  color: #000;               /*Turns the text pure black so it is easy to read against the bright cyan background.*/
+  font-weight: 600;            /*Makes the active text even bolder to stand out.*/
+}
+
+/* =====================
+   STOCKS TABLE
+===================== */
+.stocks-table { /*Targets the main HTML <table> element used for your stock list.*/
+  width: 100%;                /*Forces the table to stretch and fill the entire width of its container box.*/
+  border-collapse: collapse;  /*A crucial table rule that merges double borders between cells into a single, clean line.*/
+}
+
+.stocks-table thead th {   /*Targets the top header cells of the table (like "COMPANY", "SYMBOL", "PRICE").*/
+  font-size: 11px;                             /*Makes the header text very small.*/
+  font-weight: 600;                            /*Makes the header text thick and bold.*/
+  text-transform: uppercase;                   /*Automatically forces the header words to be CAPITALIZED*/
+  letter-spacing: 0.6px;                       /*Spreads the letters slightly so small text remains easy to read.*/
+  color: var(--text-muted);                    /*Colors the headers dark grey so the bright white stock data stands out more.*/
+  padding: 8px 12px;                           /*Adds breathing room inside the header cells (8px top/bottom, 12px sides).*/
+  text-align: left;                            /*Aligns the header text to the left side of their columns.*/
+  border-bottom: 1px solid var(--bg-border);   /*Draws a solid line underneath the headers to separate them from the stock data.*/
+}
+
+.stocks-table tbody tr { /*Targets every standard data row (each individual stock) in the list.*/
+  border-bottom: 1px solid var(--bg-border); /*Draws a separating line between every single stock row.*/
+  transition: background 0.15s;              /*Makes the hover effect incredibly snappy (0.15 seconds) so the table feels highly responsive.*/
+}
+
+.stocks-table tbody tr:last-child { /*Targets only the very last stock row at the absolute bottom of the table.*/
+  border-bottom: none; /*Removes the bottom line from the final row so it doesn't clash with the outer box border.*/
+}
+
+.stocks-table tbody tr:hover { /*Targets a stock row only when your mouse pointer rests on it.*/
+  background: var(--bg-elevated); /*Highlights the entire row with a slightly lighter background color.*/
+  cursor: pointer;                /*Changes your mouse arrow into a pointing hand, hinting that the row is clickable.*/
+}
+
+.stocks-table tbody td { /*Targets the individual data cells containing the actual stock names and numbers.*/
+  padding: 12px 12px;  /*Adds comfortable, even breathing room inside every data cell.*/
+  font-size: 13px;     /*Sets the stock data text to a readable, standard size.*/
+}
+
+.company-name {   /*Targets the text showing the full name of the stock (like "Reliance Industries").*/
+  color: var(--text-primary); /*Colors the company name bright white so it stands out immediately.*/
+  font-weight: 500;           /*Makes the text slightly thicker than normal.*/
+}
+
+.ticker-badge {   /*Targets the small symbol pill (like "RELIANCE" or "TCS") next to the company name.*/
+  font-size: 11px;                    /*Makes the text inside this badge very small.*/
+  font-weight: 600;                   /*Makes the badge text thick and bold.*/
+  padding: 2px 8px;                   /*Adds very tight, clean breathing room inside the badge.*/
+  border-radius: 4px;                 /*Just slightly rounds the corners to make it look like a neat tag.*/
+  background: var(--accent-dim);      /*Fills the badge with your see-through cyan background.*/
+  color: var(--accent);               /*Colors the text with your bright cyan variable.*/
+  border: 1px solid var(--accent)44;  /*Draws a very faint cyan line around the badge (adding "44" to a hex code makes it highly transparent).*/
+}
+
+.price-cell {    /*Targets the table column containing the current live stock price.*/
+  font-variant-numeric: tabular-nums; /*Your secret weapon again! Stops numbers from jumping left and right when the live price ticks.*/
+  font-weight: 600;                   /*Makes the main price numbers bold and prominent.*/
+  color: var(--text-primary);         /*Colors the price bright white.*/
+}
+
+.change-cell { /*Targets the column showing the percentage the stock went up or down.*/
+  font-weight: 500;  /*Makes the percentage text slightly thicker.*/
+  font-size: 12px;   /*Makes the percentage slightly smaller than the main price next to it.*/
+}
+
+.change-cell.positive { color: var(--green); } /*If the stock went up, it instantly paints the text your bullish green.*/
+.change-cell.negative { color: var(--red); }   /*If the stock went down, it instantly paints the text your bearish red.*/
+
+.volume-cell { /*Targets the column showing the total daily traded shares.*/
+  color: var(--text-secondary); /*Colors the volume numbers muted grey so they don't distract from the price action.*/
+}
+
+/* =====================
+   NEWS FEED
+===================== */
+.news-list { /*Targets the main invisible container holding all the news headlines.*/
+  display: flex;          /*Activates flexible layout to organize the list.*/
+  flex-direction: column; /*Stacks the news items vertically (top to bottom) like an Instagram feed.*/
+  gap: 0;                 /*Removes any default empty space between the items so we can control it perfectly with padding later.*/
+}
+
+.news-item { /*Targets each individual news story block.*/
+  padding: 14px 0;                           /*Adds 14 pixels of empty breathing room above and below the text of each story.*/
+  border-bottom: 1px solid var(--bg-border); /*Draws a thin dark line underneath each story to separate it clearly from the next one.*/
+}
+
+.news-item:last-child { /*Targets only the very bottom news story in the entire list.*/
+  border-bottom: none; /*Deletes that bottom separating line on the last item so it looks clean against the bottom of the main box.*/
+}
+
+.news-meta {  /*Targets the top line of a news story (which holds the source name and the timestamp).*/
+  display: flex;                  /*Activates flexible layout to align the source and the time.*/
+  justify-content: space-between; /*Pushes the source name to the far left and the time to the far right edge.*/
+  margin-bottom: 5px;             /*Adds a tiny 5-pixel space below this line, right before the actual headline text starts.*/
+}
+
+.news-source {/*Targets the text showing where the news came from (e.g., "MONEYCONTROL").*/
+  font-size: 11px;           /*Makes this source text very small.*/
+  font-weight: 600;          /*Makes the text thick and bold.*/
+  color: var(--accent);      /*Colors the source name with your bright cyan variable to make it pop.*/
+  text-transform: uppercase; /*Forces the source name to always be completely CAPITALIZED.*/
+  letter-spacing: 0.5px;     /*Spreads the letters out slightly.*/
+}
+
+.news-time { /*Targets the text showing when the article was posted (e.g., "2 min ago").*/
+  font-size: 11px;          /*Makes the time text small, matching the source text size.*/
+  color: var(--text-muted); /*Colors the time text dark grey so it doesn't distract from the main headline.*/
+}
+
+.news-title { /*Targets the main headline text of the news article.*/
+  font-size: 13px;            /*Sets the headline text to a readable size.*/
+  color: var(--text-primary); /*Colors the headline bright white.*/
+  line-height: 1.5;           /*Adds comfortable breathing room between lines if a long headline wraps to a second line.*/
+  margin-bottom: 7px;         /*Pushes the tiny category tag below it down by 7 pixels.*/
+}
+
+.news-tag { /*Targets the overall shape of the little category pill (like "RBI" or "RESULTS").*/
+  font-size: 10px;            /*Makes the tag text tiny.*/
+  font-weight: 600;           /*Makes the tag text thick and bold so it is still readable.*/
+  padding: 2px 8px;           /*Adds very tight breathing room inside the pill.*/
+  border-radius: 3px;         /*Barely rounds the corners for a sharp, technical look.*/
+  text-transform: uppercase;  /*Forces the tag text to be ALL CAPS.*/
+  letter-spacing: 0.5px;      /*Spreads the tiny letters out slightly to keep them legible.*/
+}
+
+.tag-rbi     { background: #1c2340; color: #7db4f5; }
+.tag-results { background: #1a2820; color: var(--green); }
+.tag-it      { background: #291a30; color: #c792ea; }
+.tag-fii     { background: #2b2010; color: var(--yellow); }
+.tag-market  { background: var(--bg-elevated); color: var(--text-secondary); }
+
+.view-all-link { /*Targets the button at the very bottom of your news feed.*/
+  display: block;                       /*Forces the link to take up its own full horizontal line.*/
+  margin-top: 14px;                     /*Adds space above it to separate it from the last news article.*/
+  font-size: 13px;                      /*Sets the text size for the link.*/
+  color: var(--accent);                 /*Colors the text your bright cyan variable.*/
+  font-weight: 500;                     /*Makes the text slightly thicker than normal.*/
+  text-align: center;                   /*Centers the "View all news →" text exactly in the middle of the button.*/
+  padding: 8px;                         /*Adds clickable breathing room inside the button.*/
+  border-radius: var(--radius-sm);      /*Slightly rounds the button's corners.*/
+  border: 1px solid var(--accent)44;    /*Draws a faint, see-through cyan line around the button (the "44" adds transparency).*/
+  transition: all 0.2s;                 /*Makes hovering over the button visually smooth.*/
+}
+
+.view-all-link:hover { /*Targets the "View all news" link only when your mouse hovers over it.*/
+  background: var(--accent-dim);  /*Fills the button with your see-through cyan background when hovered.*/
+}
+
+/* =====================
+   MARKET MOOD
+===================== */
+.mood-section { /*Targets the container for your bullish/bearish market sentiment indicator.*/
+  padding: 4px 0; /*Adds a tiny bit of breathing room at the top and bottom of this section.*/
+}
+
+.mood-label { /*Targets the text explaining the mood (like "Today's Sentiment").*/
+  font-size: 12px;                /*Makes this description text small.*/
+  color: var(--text-secondary);   /*Colors the text with your muted grey variable so it doesn't distract.*/
+  margin-bottom: 10px;            /*Pushes the actual progress bar down 10 pixels below this label.*/
+}
+
+.mood-bar-wrap { /*Targets the invisible box holding the progress bar and the percentage numbers next to it.*/
+  display: flex;        /*Activates flexible layout to line up the bar and the numbers horizontally.*/
+  align-items: center;  /*Vertically centers the progress bar perfectly with the text.*/
+  gap: 10px;            /*Puts exactly 10 pixels of empty space between the bar and the text.*/
+  margin-bottom: 10px;  /*Adds 10 pixels of empty space below this entire row.*/
+}
+
+.mood-bar {/*Targets the empty background track of the progress bar.*/
+  flex: 1;                        /*Forces the progress bar track to stretch and fill all leftover horizontal space.*/
+  height: 8px;                    /*Sets the thickness of the bar to exactly 8 pixels*/
+  background: var(--bg-elevated); /*Fills the empty track with a slightly lighter dark color.*/
+  border-radius: 4px;             /*Rounds the left and right ends of the bar to make a smooth pill shape.*/
+  overflow: hidden;               /*Clips off any colored fill we add later if it tries to spill outside the rounded corners.*/
+}
+
+.mood-fill { /*Targets the colored inner progress bar that actually moves and grows.*/
+  height: 100%; /*Forces the colored fill to be exactly as tall as the empty grey track holding it.*/
+  background: linear-gradient(90deg, var(--red) 0%, var(--yellow) 40%, var(--green) 100%); /*Creates a color blend that fades left-to-right from red (0%) to yellow (40%) to green (100%).*/
+  border-radius: 4px; /*Rounds the corners of the colored bar.*/
+  transition: width 0.5s ease; /*Ensures that when JavaScript updates the bar's width later, it slides smoothly over half a second instead of snapping instantly.*/
+}
+
+.mood-percent { /*Targets the percentage number (e.g., "68%") sitting next to the progress bar.*/
+  font-size: 16px;     /*Makes the number large enough to read at a glance.*/
+  font-weight: 700;    /*Makes the number thick and bold.*/
+  color: var(--green); /*Colors the number with your bullish green variable.*/
+  min-width: 36px;     /*Locks the width of this text box so the layout doesn't wiggle horizontally if the text changes from two digits ("9%") to three digits ("100%").*/
+  text-align: right;   /*Neatly aligns the number to the right edge of its invisible box.*/
+}
+
+.mood-tags { /*Targets the invisible container holding the small "Bearish" and "Bullish" pills.*/
+  display: flex;       /*Activates flexible layout to place the pills neatly side-by-side.*/
+  gap: 8px;            /*Adds exactly 8 pixels of space between the pills*/
+  margin-bottom: 16px; /*Adds 16 pixels of empty space below the pills.*/
+}
+
+.mood-tag { /*Targets the basic, default shape of the "Bearish" or "Bullish" indicator pills.*/
+  font-size: 12px;                    /*Makes the text inside the pill small.*/
+  font-weight: 600;                   /*Makes the text bold.*/
+  padding: 4px 12px;                  /*Adds comfortable breathing room inside the pill.*/
+  border-radius: 20px;                /*Completely rounds the sides of the pill.*/
+  border: 1px solid var(--bg-border); /*Draws a default dark grey outline around the inactive pill.*/
+  color: var(--text-muted);           /*Sets the default text color to a muted grey.*/
+}
+
+.mood-tag.bearish { /*Targets the "Bearish" pill only when you want it to look active.*/
+  border-color: var(--red);   /*Overrides the dark grey outline with your bearish red variable.*/
+  color: var(--red);          /*Colors the text red.*/
+  background: var(--red-bg);  /*Fills the pill with your see-through red background to make it glow.*/
+}
+
+.mood-tag.active-mood {   /*Targets the specific sentiment pill (like "Bullish") only when the market mood is positive.*/
+  border-color: var(--green);  /*Changes the pill's outline to your bullish green.*/
+  color: var(--green);         /*Colors the text inside the pill green.*/
+  background: var(--green-bg); /*Fills the pill with your see-through green background to make it glow.*/
+}
+
+.mood-stats { /*Targets the invisible box holding the three numbers at the very bottom (Advancing, Declining, Unchanged).*/
+  display: grid;                            /*Activates the grid layout system to organize the three numbers perfectly.*/
+  grid-template-columns: repeat(3, 1fr);    /*Chops the box into exactly 3 equal-sized columns side-by-side.*/
+  gap: 8px;                                 /*Adds 8 pixels of space between the columns.*/
+  border-top: 1px solid var(--bg-border);   /*Draws a thin dark line above the numbers to separate them from the tags above.*/
+  padding-top: 14px;                        /*Adds 14 pixels of empty space above the numbers so they don't hit the top line.*/
+}
+
+.mood-stat { /*Targets the individual columns holding a number and its label.*/
+  text-align: center; /*Centers the number and the label exactly in the middle of their column.*/
+}
+
+.ms-value {   /*Targets the large statistical numbers (like "324" or "176").*/
+  font-size: 20px;  /*Makes the numbers large and easy to read at a glance.*/
+  font-weight: 700; /*Makes the numbers thick and bold.*/
+}
+
+.ms-label {   /*Targets the tiny text under the numbers (like "Advancing").*/
+  font-size: 11px;          /*Makes this label text very small.*/
+  color: var(--text-muted); /*Colors the text dark grey so it doesn't distract from the big numbers above it.*/
+  margin-top: 2px;          /*Pushes the label 2 pixels down from the bottom of the big number.*/
+}
+
+
+/* =====================
+   SCROLLBAR STYLING
+===================== */
+::-webkit-scrollbar       { width: 6px; } /*Targets the entire scrollbar system (specifically for Chrome, Safari, and Edge browsers).*/
+::-webkit-scrollbar-track { background: var(--bg-base); } /*Fills the gutter with your absolute darkest background color so it turns invisible against the page.*/
+::-webkit-scrollbar-thumb { background: var(--bg-border); border-radius: 3px; } /*Targets the actual handle that you click and drag to scroll through your news feed or stock list.*/
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); } /*Targets the handle only when your mouse pointer rests directly on it.*/
